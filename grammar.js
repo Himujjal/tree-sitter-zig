@@ -17,6 +17,7 @@ const PREC = {
   if: -1,
   optional: -2,
   array: -3,
+  type_field: -4,
 };
 
 const numeric_types = [
@@ -75,6 +76,7 @@ module.exports = grammar({
     [$.anonymous_struct_enum, $.anonymous_array_expr],
     [$.assignment_expression],
     [$.call_expression],
+    [$._type_field_expression, $.identifier],
   ],
 
   rules: {
@@ -453,9 +455,21 @@ module.exports = grammar({
           $.pointer_type,
           $.error_type,
           $.array_type,
+          $._type_field_expression,
           $.custom_number_type,
           alias($._struct_standalone, $.struct_expression),
           alias($.identifier, $.type_identifier)
+        )
+      ),
+
+    _type_field_expression: ($) =>
+      prec.left(
+        PREC.type_field,
+        seq(
+          field("value", $.identifier),
+          repeat(
+            seq(".", field("field", alias($.identifier, $.field_identifier)))
+          )
         )
       ),
 
@@ -789,7 +803,10 @@ module.exports = grammar({
         repeat1(
           seq(
             "\\\\",
-            alias(repeat(choice(/[^\r\n]/, $.escape_sequence)), $.string_literal),
+            alias(
+              repeat(choice(/[^\r\n]/, $.escape_sequence)),
+              $.string_literal
+            )
           )
         )
       ),

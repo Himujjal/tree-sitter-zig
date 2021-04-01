@@ -2054,6 +2054,10 @@
           },
           {
             "type": "SYMBOL",
+            "name": "_type_field_expression"
+          },
+          {
+            "type": "SYMBOL",
             "name": "custom_number_type"
           },
           {
@@ -2073,6 +2077,48 @@
             },
             "named": true,
             "value": "type_identifier"
+          }
+        ]
+      }
+    },
+    "_type_field_expression": {
+      "type": "PREC_LEFT",
+      "value": -4,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "value",
+            "content": {
+              "type": "SYMBOL",
+              "name": "identifier"
+            }
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "."
+                },
+                {
+                  "type": "FIELD",
+                  "name": "field",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "identifier"
+                    },
+                    "named": true,
+                    "value": "field_identifier"
+                  }
+                }
+              ]
+            }
           }
         ]
       }
@@ -4835,6 +4881,10 @@
     ],
     [
       "call_expression"
+    ],
+    [
+      "_type_field_expression",
+      "identifier"
     ]
   ],
   "precedences": [],

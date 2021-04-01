@@ -244,3 +244,56 @@ extern "C" fn name();
         (string_literal)))
     name: (identifier)
     parameters: (parameters)))
+
+===========================
+Function Declaration 2
+===========================
+pub fn build(b: *std.build.Builder) {
+  // Standard
+  const target = b.standardTargetOptions(.{});
+  const exe = b.addExecutable("tree-sitter-zig", "yo.zig");
+}
+-----
+
+(source_file
+  (function_declaration
+    (visibility_modifier)
+    name: (identifier)
+    parameters: (parameters
+      (parameter
+        name: (identifier)
+        type: (pointer_type
+          value: (identifier)
+          field: (field_identifier)
+          field: (field_identifier)
+        )
+      )
+    )
+    body: (block
+      (line_comment)
+      (assignment_statement
+        name: (identifier) 
+        expression: (field_expression
+          value: (identifier)
+          field: (call_expression
+            function: (identifier)
+            arguments: (arguments (anonymous_array_expr))
+          )
+        )
+      )
+      (assignment_statement
+        name: (identifier)
+        expression: (field_expression
+          value: (identifier)
+          field: (call_expression
+            function: (identifier)
+            arguments: (arguments
+              (string_literal)
+              (string_literal)
+            )
+          )
+        )
+      )
+    )
+  )
+)

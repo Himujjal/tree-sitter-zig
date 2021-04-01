@@ -1,4 +1,4 @@
 {
-  "exec": "npm run gen && npm run test",
+  "exec": "tree-sitter generate",
   "watch": ["grammar.js"]
 }
