@@ -1,1 +1,0 @@
-/home/himu/my_code/zig/projects/tree-sitter-zig/queries/highlights.scm
